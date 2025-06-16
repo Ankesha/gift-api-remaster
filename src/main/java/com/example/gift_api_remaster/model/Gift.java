@@ -1,0 +1,38 @@
+package com.example.gift_api_remaster.model;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+public class Gift {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private double price;
+    @ManyToOne
+    private Child child;
+
+    @Version
+    private int version;
+
+    //TODO: Czy tutaj cos jeszcze potrzebujemy ? Czy walidacje tutaj tez robimy przed zapisaniem do bazy ?
+
+}

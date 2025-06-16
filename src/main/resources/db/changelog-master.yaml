@@ -1,0 +1,60 @@
+
+#TODO: Zamien aby ten byl tylko masterem, do zarzdzania ktore ppliki maja zostac wgrane do bazy
+
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-child-table
+      author: twoje_imie
+      changes:
+        - createTable:
+            tableName: child
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: surname
+                  type: VARCHAR(255)
+              - column:
+                  name: birthday
+                  type: DATE
+              - column:
+                  name: version
+                  type : BIGINT
+  - changeSet:
+      id: 002-create-gift-table
+      author: twoje_imie
+      changes:
+        - createTable:
+            tableName: gift
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT AUTO_INCREMENT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: price
+                  type: DECIMAL(10,2)
+              - column:
+                  name: child_id
+                  type: BIGINT
+              - column:
+                  name: version
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseTableName: gift
+            baseColumnNames: child_id
+            referencedTableName: child
+            referencedColumnNames: id
+            constraintName: fk_gift_child

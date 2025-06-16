@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_MYSQL_HOST:localhost}:${DB_MYSQL_PORT:3306}/${DB_NAME:gifts}
+    username: ${DB_MYSQL_USERNAME:root}
+    password: ${DB_MYSQL_PASSWORD:root}
+    driverClassName: com.mysql.cj.jdbc.Driver
+  liquibase:
+    change-log: classpath:db/changelog-master.yaml
+#    drop-first: true
