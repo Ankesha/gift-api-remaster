@@ -15,7 +15,6 @@ import java.time.LocalDate;
 public class CreateChildCommand {
 
 
-    //TODO: Zrobic walidacje
     @NotBlank(message = "name cannot be null")
     @Pattern(regexp = "[a-zA-Z\\s]*", message = "name can only contain alphabets and space")
     private String name;

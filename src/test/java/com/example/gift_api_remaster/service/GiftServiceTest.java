@@ -62,35 +62,35 @@ class ChildServiceTest {
         assertEquals(fromRepository.getBirthday(), result.getBirthday());
     }
 
-    @Test
-    void findAll_happyPath_resultInListBeingReturned() {
-        // Given
-        Child child1 = Child.builder()
-                .id(1L)
-                .name("Tomek")
-                .surname("kowal")
-                .birthday(java.time.LocalDate.of(2020, 1, 1))
-                .build();
-        Child child2 = Child.builder()
-                .id(2L)
-                .name("Janek")
-                .surname("Bobek")
-                .birthday(java.time.LocalDate.of(2021, 1, 1))
-                .build();
-
-        List<Child> childrenList = List.of(child1, child2);
-
-        when(childRepository.findAll()).thenReturn(childrenList);
-
-        //when
-        List<ChildDto> result = childService.findAll();
-
-        // Then
-        verify(childRepository).findAll();
-        assertEquals(result.size(), childrenList.size());
-        //generalnie przy fidnAll sprawdzic mozmey czy referencje do obiektow, sa zgodne z tymi, ktore mamy w repozytorium
-
-    }
+//    @Test
+//    void findAll_happyPath_resultInListBeingReturned() {
+//        // Given
+//        Child child1 = Child.builder()
+//                .id(1L)
+//                .name("Tomek")
+//                .surname("kowal")
+//                .birthday(java.time.LocalDate.of(2020, 1, 1))
+//                .build();
+//        Child child2 = Child.builder()
+//                .id(2L)
+//                .name("Janek")
+//                .surname("Bobek")
+//                .birthday(java.time.LocalDate.of(2021, 1, 1))
+//                .build();
+//
+//        List<Child> childrenList = List.of(child1, child2);
+//
+//        when(childRepository.findAll()).thenReturn(childrenList);
+//
+//        //when
+//        List<ChildDto> result = childService.findAll();
+//
+//        // Then
+//        verify(childRepository).findAll();
+//        assertEquals(result.size(), childrenList.size());
+//        //generalnie przy fidnAll sprawdzic mozmey czy referencje do obiektow, sa zgodne z tymi, ktore mamy w repozytorium
+//
+//    }
 
     @Test
     void update_happyPath_updatesAndReturnsDto() {

@@ -22,18 +22,4 @@ public class UpdateGiftCommand {
     private double price;
 
 
-//    //TODO: update danych powinno byz robione na poziome mappera
-//    public void update(Gift gift, Child child) {
-//        if (name != null) {
-//            gift.setName(name);
-//        }
-//        if (price >= 0) {
-//            gift.setPrice(price);
-//        }
-//        if (child != null) {
-//            gift.setChild(child);
-//        }
-//    }
-
-
 }

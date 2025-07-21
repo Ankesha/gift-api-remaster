@@ -10,14 +10,26 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ChildMapper {
 
-
     public static ChildDto toDto(Child child) {
-        if (child == null) return null;
+        if (child == null)
+            return null;
         return ChildDto.builder()
                 .id(child.getId())
                 .name(child.getName())
                 .surname(child.getSurname())
                 .birthday(child.getBirthday())
+                .build();
+    }
+
+    public static ChildDto toDtoWithGifts(Child child) {
+        if (child == null)
+            return null;
+        return ChildDto.builder()
+                .id(child.getId())
+                .name(child.getName())
+                .surname(child.getSurname())
+                .birthday(child.getBirthday())
+                .giftsCount(child.getGifts() == null ? 0 : child.getGifts().size())
                 .build();
     }
 
@@ -32,13 +44,16 @@ public class ChildMapper {
     }
 
 
-    public static void update(UpdateChildCommand command, Child targetChild) {
-        if (command == null) {
-            return;
+    public static Child update(UpdateChildCommand command, Child original) {
+        if (command == null || original == null) {
+            return null;
         }
-        targetChild.setName(command.getName());
-        targetChild.setSurname(command.getSurname());
-        targetChild.setBirthday(command.getBirthday());
-        targetChild.setVersion(command.getVersion());
+        Child child = original.clone()
+                .setName(command.getName())
+                .setSurname(command.getSurname())
+                .setBirthday(command.getBirthday())
+                .setVersion(command.getVersion());
+        return child;
     }
+
 }

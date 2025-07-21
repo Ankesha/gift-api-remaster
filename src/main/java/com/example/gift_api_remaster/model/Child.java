@@ -1,5 +1,6 @@
 package com.example.gift_api_remaster.model;
 
+import com.example.gift_api_remaster.exception.GiftApiException;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -21,7 +23,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-public class Child {
+@Accessors(chain = true)
+public class Child implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +34,17 @@ public class Child {
     private LocalDate birthday;
 
     @OneToMany(mappedBy = "child")
-    private Set<Gift> giftList;
+    private Set<Gift> gifts;
 
     @Version
     private int version;
+
+    @Override
+    public Child clone() {
+        try {
+            return (Child) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new GiftApiException("Cloning not supported for Child entity", e);
+        }
+    }
 }

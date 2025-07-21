@@ -33,6 +33,4 @@ public class Gift {
     @Version
     private int version;
 
-    //TODO: Czy tutaj cos jeszcze potrzebujemy ? Czy walidacje tutaj tez robimy przed zapisaniem do bazy ?
-
 }
