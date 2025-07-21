@@ -11,7 +11,11 @@ import com.example.gift_api_remaster.service.ChildService;
 import com.example.gift_api_remaster.service.GiftService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +23,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -38,10 +44,29 @@ public class ChildController {
         return childService.findById(id);
     }
 
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
+    public ResponseEntity<Void> uploadChildren(@RequestPart("file") MultipartFile file) {
+        childService.importChildrenDB(file);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(value = "/gifts/upload", consumes = "multipart/form-data")
+    public ResponseEntity<Void> uploadGifts(@RequestPart("file") MultipartFile file) {
+        giftService.importGiftsDB(file);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // /api/v1/children?page=0&size=10
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ChildDto> findAll() {
-        return childService.findAll();
+    public Page<ChildDto> findAll(Pageable pageable) {
+        return childService.findAll(pageable);
+    }
+
+    @GetMapping("/with-gifts")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ChildDto> findAllWithGifts(@PageableDefault Pageable pageable) {
+        return childService.findAllWithGifts(pageable);
     }
 
     @PostMapping
