@@ -16,7 +16,7 @@ public class GiftMapper {
                 .id(gift.getId())
                 .name(gift.getName())
                 .price(gift.getPrice())
-                .idChild(gift.getChild().getId())
+                .childId(gift.getChild().getId())
                 .build();
     }
 

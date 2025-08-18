@@ -8,6 +8,7 @@ import com.example.gift_api_remaster.model.command.UpdateChildCommand;
 import com.example.gift_api_remaster.model.dto.ChildDto;
 import com.example.gift_api_remaster.model.mapper.ChildMapper;
 import com.example.gift_api_remaster.repository.ChildRepository;
+import com.example.gift_api_remaster.service.operations.ChildOperations;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -28,11 +29,12 @@ import java.io.Reader;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.example.gift_api_remaster.model.mapper.ChildMapper.toDto;
-import static com.example.gift_api_remaster.model.mapper.ChildMapper.toEntity;
+import static com.example.gift_api_remaster.service.operations.ChildOperations.OPERATIONS_SUFFIX;
 
 @Service
 @RequiredArgsConstructor
@@ -45,10 +47,8 @@ public class ChildService {
     private static final String SINGLE_CHILD_PARAMS = "(\"%s\", \"%s\", \"%s\", \"0\"),";
 
     private final JdbcTemplate jdbcTemplate;
-
-
     private final ChildRepository childRepository;
-
+    private final Map<String, ChildOperations> childrenOperations;
 
     public ChildDto findById(long id) {
         return childRepository.findById(id)
@@ -71,12 +71,15 @@ public class ChildService {
     }
 
     public ChildDto save(CreateChildCommand command) {
-        return toDto(childRepository.save(toEntity(command)));
+        ChildOperations operations = childrenOperations.get(command.getType() + OPERATIONS_SUFFIX);
+        Child child = operations.create(command);
+        Child savedChild = childRepository.save(child);
+        //TODO: zapis do bazy danych
+        return operations.mapToDto(savedChild);
     }
 
     @Transactional
     public ChildDto update(UpdateChildCommand command, long id) {
-
         Child original = childRepository.findById(id)
                 .orElseThrow(() -> new GiftApiException(MessageFormat
                         .format("Child with id {0} not found", id)));

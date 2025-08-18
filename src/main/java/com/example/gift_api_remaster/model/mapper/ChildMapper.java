@@ -37,9 +37,9 @@ public class ChildMapper {
     public static Child toEntity(CreateChildCommand command) {
         if (command == null) return null;
         return Child.builder()
-                .name(command.getName())
-                .surname(command.getSurname())
-                .birthday(command.getBirthday())
+//                .name(command.getName())
+//                .surname(command.getSurname())
+//                .birthday(command.getBirthday())
                 .build();
     }
 

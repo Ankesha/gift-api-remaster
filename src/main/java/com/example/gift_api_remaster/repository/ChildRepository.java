@@ -18,7 +18,6 @@ import java.util.Optional;
 public interface ChildRepository extends JpaRepository<Child, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Transactional(readOnly = false)
     Optional<Child> findWithLockingById(Long id);
 
     @Query("SELECT c.id FROM Child c")

@@ -9,9 +9,12 @@ spring:
     password: ${DB_MYSQL_PASSWORD:root}
     driverClassName: com.mysql.cj.jdbc.Driver
   liquibase:
-    change-log: classpath:db/master.yaml
-#    drop-first: true
-#    search-paths: classpath:db/changelog
+    change-log: classpath:db/changelog-master.yaml
+   # drop-first: true
+  #    search-paths: classpath:db/changelog
   jpa:
     open-in-view: false
     show-sql: true
+
+server:
+  port: 8082
