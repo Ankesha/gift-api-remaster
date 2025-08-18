@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
@@ -13,17 +14,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.Set;
+
+import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @Accessors(chain = true)
+@Inheritance(strategy = SINGLE_TABLE)
 public class Child implements Cloneable {
 
     @Id

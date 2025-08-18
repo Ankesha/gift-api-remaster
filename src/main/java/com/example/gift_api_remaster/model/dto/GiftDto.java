@@ -12,6 +12,6 @@ public class GiftDto {
     private Long id;
     private String name;
     private double price;
-    private long idChild;
+    private long childId;
 
 }

@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002.1-boy-and-girl-columns
+      author: mateusz
+      changes:
+        - addColumn:
+            tableName: child
+            columns:
+              - column:
+                  name: pipe_length
+                  type: DECIMAL(10,2)
+              - column:
+                  name: dress_color
+                  type: VARCHAR(50)
+
+
