@@ -21,6 +21,46 @@ public class ChildMapper {
                 .build();
     }
 
+
+//public ChildDto toDto(Child child) {
+//    int giftsCount = child.getGifts() == null ? 0 : child.getGifts().size();
+//
+//    if (child instanceof Boy boy) {
+//        return BoyDto.builder()
+//                .id(boy.getId())
+//                .name(boy.getName())
+//                .surname(boy.getSurname())
+//                .birthday(boy.getBirthday())
+//                .giftsCount(giftsCount)
+//                .type("BOY")
+//                .pipeLength(boy.getPipeLength())
+//                .build();
+//    }
+//
+//    if (child instanceof Girl girl) {
+//        return GirlDto.builder()
+//                .id(girl.getId())
+//                .name(girl.getName())
+//                .surname(girl.getSurname())
+//                .birthday(girl.getBirthday())
+//                .giftsCount(giftsCount)
+//                .type("GIRL")
+//                .dressColor(girl.getDressColor())
+//                .build();
+//    }
+//
+//    // Bezpieczny wariant bazowy – gdyby pojawił się inny podtyp
+//    return ChildDto.builder()
+//            .id(child.getId())
+//            .name(child.getName())
+//            .surname(child.getSurname())
+//            .birthday(child.getBirthday())
+//            .giftsCount(giftsCount)
+//            .type("UNKNOWN")
+//            .build();
+//}
+
+
     public static ChildDto toDtoWithGifts(Child child) {
         if (child == null)
             return null;

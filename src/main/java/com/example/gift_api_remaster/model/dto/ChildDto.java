@@ -1,5 +1,8 @@
 package com.example.gift_api_remaster.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +15,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+
+
 public class ChildDto {
 
     private long id;

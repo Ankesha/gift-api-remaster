@@ -10,7 +10,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
   liquibase:
     change-log: classpath:db/changelog-master.yaml
-   # drop-first: true
+    #drop-first: true
   #    search-paths: classpath:db/changelog
   jpa:
     open-in-view: false
