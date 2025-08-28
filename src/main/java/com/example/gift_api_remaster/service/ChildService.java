@@ -15,6 +15,7 @@ import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -51,23 +52,28 @@ public class ChildService {
     private final Map<String, ChildOperations> childrenOperations;
 
     public ChildDto findById(long id) {
-        return childRepository.findById(id)
-                .map(ChildMapper::toDto)
+        Child child = childRepository.findById(id)
                 .orElseThrow(() -> new GiftApiException(MessageFormat
                         .format("Child with id {0} not found", id)));
+        // zrobic odzielna metode do wypluwania nazwy klasy
+        ChildOperations childOperations = childrenOperations.get(child.getClass().getSimpleName().toLowerCase() + OPERATIONS_SUFFIX);
+        return childOperations.mapToDto(child);
+
+
     }
 
     @Transactional(readOnly = true)
     public Page<ChildDto> findAll(Pageable pageable) {
-        return childRepository.findAllAsDto(pageable);
-    }
-
-    public List<ChildDto> findAllWithGifts(Pageable pageable) {
         Page<Long> childrenIds = childRepository.findAllIds(pageable);
         List<Child> children = childRepository.findAllWithGiftsByIdIn(childrenIds.getContent());
-        return children.stream()
-                .map(ChildMapper::toDtoWithGifts)
+        List<ChildDto> list = children.stream()
+                .map(child -> {
+                    ChildOperations operations = childrenOperations.get(child.getClass().getSimpleName().toLowerCase() + OPERATIONS_SUFFIX);
+                    return operations.mapToDto(child);
+                })
                 .toList();
+        Page<ChildDto> page = new PageImpl<>(list, pageable, childrenIds.getTotalElements());
+        return page;
     }
 
     public ChildDto save(CreateChildCommand command) {

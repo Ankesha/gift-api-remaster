@@ -65,8 +65,8 @@ public class ChildController {
 
     @GetMapping("/with-gifts")
     @ResponseStatus(HttpStatus.OK)
-    public List<ChildDto> findAllWithGifts(@PageableDefault Pageable pageable) {
-        return childService.findAllWithGifts(pageable);
+    public Page<ChildDto> findAllWithGifts(@PageableDefault Pageable pageable) {
+        return childService.findAll(pageable);
     }
 
     @PostMapping
