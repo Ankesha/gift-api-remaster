@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003.child-view
+      author: mateusz
+      changes:
+        - createView:
+            viewName: child_view
+            replaceIfExists: true
+            selectQuery: |
+              SELECT c.id, c.name, c.surname, c.birthday, c. COUNT(*) as gifts_count
+              FROM child c
+              LEFT JOIN gift ON c.id = gift.child_id
+              GROUP BY c.id, c.name, c.surname, c.birthday
+            
+
+

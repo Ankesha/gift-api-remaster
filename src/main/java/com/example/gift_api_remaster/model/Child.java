@@ -1,13 +1,7 @@
 package com.example.gift_api_remaster.model;
 
 import com.example.gift_api_remaster.exception.GiftApiException;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +20,9 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 @Getter
 @Setter
 @SuperBuilder
-@Accessors(chain = true)
+@Accessors(chain = true) // sprawia ze seter zwraca od razu obiekt
 @Inheritance(strategy = SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 public class Child implements Cloneable {
 
     @Id

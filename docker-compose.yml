@@ -23,7 +23,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: root
+      MYSQL_DATABASE: gifts
     volumes:
       - db_data:/var/lib/mysql
     networks:

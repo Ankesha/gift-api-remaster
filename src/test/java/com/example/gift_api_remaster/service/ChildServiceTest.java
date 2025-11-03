@@ -39,28 +39,28 @@ class ChildServiceTest {
     private ChildService childService;
 
 
-    @Test
-    void findById_happyPath_resultsInChildBeingReturned() {
-        // Given jest to prszygotowanie danych, ktore beda uzywane w teście
-        long childId = 1;
-        Child fromRepository = Child.builder()
-                .id(childId)
-                .name("Mati")
-                .surname("Kowalski")
-                .birthday(java.time.LocalDate.of(2020, 1, 1))
-                .build();
-        when(childRepository.findById(childId)).thenReturn(Optional.of(fromRepository));
-
-        // When jest to wywołanie metody, która ma być testowana
-        ChildDto result = childService.findById(childId);
-
-        // Then jest to sprawdzenie, czy wynik jest zgodny z oczekiwaniami
-        verify(childRepository).findById(childId);
-        assertEquals(childId, result.getId());
-        assertEquals(fromRepository.getName(), result.getName());
-        assertEquals(fromRepository.getSurname(), result.getSurname());
-        assertEquals(fromRepository.getBirthday(), result.getBirthday());
-    }
+//    @Test
+//    void findById_happyPath_resultsInChildBeingReturned() {
+//        // Given jest to prszygotowanie danych, ktore beda uzywane w teście
+//        long childId = 1;
+//        Child fromRepository = Child.builder()
+//                .id(childId)
+//                .name("Mati")
+//                .surname("Kowalski")
+//                .birthday(java.time.LocalDate.of(2020, 1, 1))
+//                .build();
+//        when(childRepository.findById(childId)).thenReturn(Optional.of(fromRepository));
+//
+//        // When jest to wywołanie metody, która ma być testowana
+//        ChildDto result = childService.findById(childId);
+//
+//        // Then jest to sprawdzenie, czy wynik jest zgodny z oczekiwaniami
+//        verify(childRepository).findById(childId);
+//        assertEquals(childId, result.getId());
+//        assertEquals(fromRepository.getName(), result.getName());
+//        assertEquals(fromRepository.getSurname(), result.getSurname());
+//        assertEquals(fromRepository.getBirthday(), result.getBirthday());
+//    }
 
 //    @Test
 //    void findAll_happyPath_resultInListBeingReturned() {

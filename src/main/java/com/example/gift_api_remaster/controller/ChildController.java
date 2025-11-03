@@ -1,6 +1,7 @@
 package com.example.gift_api_remaster.controller;
 
 
+import com.example.gift_api_remaster.filtering.SearchCriteria;
 import com.example.gift_api_remaster.model.command.CreateChildCommand;
 import com.example.gift_api_remaster.model.command.CreateGiftCommand;
 import com.example.gift_api_remaster.model.command.UpdateChildCommand;
@@ -57,17 +58,33 @@ public class ChildController {
     }
 
     // /api/v1/children?page=0&size=10
-    @GetMapping
+
+    //!!!!!
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public Page<ChildDto> findAll(List<SearchCriteria> params, Pageable pageable) {
+//        return childService.findAll(pageable, params);
+//    }
+    //!!!!! tak nie robic tylko dla przykladu !!!
+    @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public Page<ChildDto> findAll(Pageable pageable) {
-        return childService.findAll(pageable);
+    public Page<ChildDto> findAll(@RequestBody List<SearchCriteria> params, Pageable pageable) {
+        return childService.findAll(pageable, params);
     }
 
-    @GetMapping("/with-gifts")
+    //!!!!!!!!
+
+    @GetMapping("/testPaginacjiWPamieci")
     @ResponseStatus(HttpStatus.OK)
-    public Page<ChildDto> findAllWithGifts(@PageableDefault Pageable pageable) {
-        return childService.findAll(pageable);
+    public Page<ChildDto> findAll2(Pageable pageable) {
+        return childService.findAll2(pageable);
     }
+//
+//    @GetMapping("/with-gifts")
+//    @ResponseStatus(HttpStatus.OK)
+//    public Page<ChildDto> findAllWithGifts(@PageableDefault Pageable pageable) {
+//        return childService.findAll(pageable);
+//    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

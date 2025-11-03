@@ -1,6 +1,7 @@
 package com.example.gift_api_remaster.model;
 
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
+@DiscriminatorValue("girl")
 public class Girl extends Child {
 
     private String dressColor;

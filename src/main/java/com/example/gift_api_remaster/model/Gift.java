@@ -27,6 +27,7 @@ public class Gift {
     private Long id;
     private String name;
     private double price;
+
     @ManyToOne
     private Child child;
 
