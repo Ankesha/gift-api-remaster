@@ -2,6 +2,7 @@ package com.example.gift_api_remaster.controller;
 
 
 import com.example.gift_api_remaster.filtering.SearchCriteria;
+import com.example.gift_api_remaster.model.SearchParams;
 import com.example.gift_api_remaster.model.command.CreateChildCommand;
 import com.example.gift_api_remaster.model.command.CreateGiftCommand;
 import com.example.gift_api_remaster.model.command.UpdateChildCommand;
@@ -68,8 +69,10 @@ public class ChildController {
     //!!!!! tak nie robic tylko dla przykladu !!!
     @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public Page<ChildDto> findAll(@RequestBody List<SearchCriteria> params, Pageable pageable) {
-        return childService.findAll(pageable, params);
+//    public Page<ChildDto> findAll(@RequestBody List<SearchCriteria> params, Pageable pageable) {
+    public Page<ChildDto> findAll(SearchParams params, Pageable pageable) {
+//        return childService.findAll(pageable, params);
+        return null;
     }
 
     //!!!!!!!!

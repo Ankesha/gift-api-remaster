@@ -1,9 +1,12 @@
 package com.example.gift_api_remaster.service.operations;
 
 import com.example.gift_api_remaster.model.Boy;
+import com.example.gift_api_remaster.model.BoyView;
 import com.example.gift_api_remaster.model.Child;
+import com.example.gift_api_remaster.model.ChildView;
 import com.example.gift_api_remaster.model.command.CreateChildCommand;
 import com.example.gift_api_remaster.model.dto.BoyDto;
+import com.example.gift_api_remaster.model.dto.ChildDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +41,15 @@ public class BoyOperations implements ChildOperations {
                 .build();
     }
 
+    @Override
+    public ChildDto mapToDto(ChildView childView) {
+        BoyView boyView = (BoyView) childView;
+        return BoyDto.builder()
+                .id(boyView.getId())
+                .name(boyView.getName())
+                .surname(boyView.getSurname())
+                .birthday(boyView.getBirthday())
+                .pipeLength(boyView.getPipeLength())
+                .build();
+    }
 }

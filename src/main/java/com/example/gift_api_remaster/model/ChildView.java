@@ -12,7 +12,6 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
 @SuperBuilder
