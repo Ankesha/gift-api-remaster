@@ -73,7 +73,16 @@ public class ChildService {
                     .format("Child with type {0} not supported", child.getClass().getSimpleName()));
         }
         return operations;
+    }
 
+    private ChildOperations resolveChildOperations(ChildView childView){
+        String operationKey = childView.getClass().getSimpleName().toLowerCase() + OPERATIONS_SUFFIX;
+        ChildOperations operations = childrenOperations.get(operationKey);
+        if (operations == null) {
+            throw new GiftApiException(MessageFormat
+                    .format("Child with type {0} not supported", childView.getClass().getSimpleName()));
+        }
+        return operations;
     }
 
     @Transactional(readOnly = true)
@@ -88,9 +97,9 @@ public class ChildService {
 //                })
 //                .toList();
         return childViewRepository.findAll(specification, pageable)
-                .map(child -> {
-                    ChildOperations operations = resolveChildOperations(child);
-                    return operations.mapToDto(child);
+                .map(childView -> {
+                    ChildOperations operations = resolveChildOperations(childView);
+                    return operations.mapToDto(childView);
                 });
     }
 

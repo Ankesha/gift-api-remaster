@@ -2,6 +2,7 @@ package com.example.gift_api_remaster.controller;
 
 
 import com.example.gift_api_remaster.filtering.SearchCriteria;
+import com.example.gift_api_remaster.model.SearchParams;
 import com.example.gift_api_remaster.model.command.CreateChildCommand;
 import com.example.gift_api_remaster.model.command.CreateGiftCommand;
 import com.example.gift_api_remaster.model.command.UpdateChildCommand;

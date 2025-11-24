@@ -1,6 +1,7 @@
 package com.example.gift_api_remaster.filtering;
 
 import com.example.gift_api_remaster.model.Child;
+import com.example.gift_api_remaster.model.ChildView;
 import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 @UtilityClass
 public class SpecificationBuilder {
 
-    public static Specification<Child> buildSpecification(List<SearchCriteria> params) {
+    public static Specification<ChildView> buildSpecification(List<SearchCriteria> params) {
 
         List<ChildSpecification> specifications = new ArrayList<>();
         for (SearchCriteria param : params) {
@@ -23,7 +24,7 @@ public class SpecificationBuilder {
         //3 różen spec -> dziecko ma na imię Maciek,  dziecko ma na nazwisko Nowak,  dziecko urodziło się 2018-03-03
 
 
-        Specification<Child> spec = Specification.where(null);
+        Specification<ChildView> spec = Specification.where(null);
         for (ChildSpecification specification : specifications) {
             spec.and(specification);
         }

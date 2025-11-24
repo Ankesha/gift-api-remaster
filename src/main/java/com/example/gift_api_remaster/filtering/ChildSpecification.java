@@ -1,6 +1,7 @@
 package com.example.gift_api_remaster.filtering;
 
 import com.example.gift_api_remaster.model.Child;
+import com.example.gift_api_remaster.model.ChildView;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -10,14 +11,14 @@ import org.springframework.data.jpa.domain.Specification;
 
 
 @AllArgsConstructor
-public class ChildSpecification implements Specification<Child> {
+public class ChildSpecification implements Specification<ChildView> {
 
 
     private SearchCriteria criteria;
 
 
     @Override
-    public Predicate toPredicate(Root<Child> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<ChildView> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if (criteria.getOperation().equalsIgnoreCase("=")) {
             if (root.get(criteria.getKey()).getJavaType() == String.class) {
                 return criteriaBuilder.like(

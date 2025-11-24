@@ -2,8 +2,11 @@ package com.example.gift_api_remaster.service.operations;
 
 
 import com.example.gift_api_remaster.model.Child;
+import com.example.gift_api_remaster.model.ChildView;
 import com.example.gift_api_remaster.model.Girl;
+import com.example.gift_api_remaster.model.GirlView;
 import com.example.gift_api_remaster.model.command.CreateChildCommand;
+import com.example.gift_api_remaster.model.dto.ChildDto;
 import com.example.gift_api_remaster.model.dto.GirlDto;
 import com.example.gift_api_remaster.repository.ChildRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,20 @@ public class GirlOperations implements ChildOperations {
                 .birthday(girl.getBirthday())
                 .dressColor(girl.getDressColor())
                 .build();
+    }
+
+    @Override
+    public ChildDto mapToDto(ChildView childView){
+        GirlView girlView = (GirlView) childView;
+        return GirlDto.builder()
+                .id(girlView.getId())
+                .name(girlView.getName())
+                .surname(girlView.getSurname())
+                .birthday(girlView.getBirthday())
+                .dressColor(girlView.getDressColor())
+                .build();
+
+
     }
 
 }
